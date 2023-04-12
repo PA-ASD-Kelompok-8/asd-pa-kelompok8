@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 import datetime
-from loginn import *
+from loginawal import *
 
 class Task:
     def __init__(self, description):
@@ -188,143 +188,136 @@ class ToDoList:
         
     
     def aluruser(self):
+        global x
         while True:
-            os.system("cls")
-            print(50*"=")
-            print("1. Tambahkan To Do List")
-            print("2. Hapus To Do List ")
-            print("3. Tandai To Do List yang Selesai")
-            print("4. Tampilkan To Do List")
-            print("5. Cari To Do List")
-            print("6. Mengurutkan To Do List sesuai Abjad ")
-            print("7. Exit")
-            print(50*"=")
-            pilihan = int(input("Masukkan pilihan anda : "))
-            if pilihan == 1:
-                tdl = input("Masukkan to do list terbaru : ")
-                self.add_task(tdl)
-                os.system("cls")
-            elif pilihan == 2:
-                hapus = input("Masukkan to do list yang ingin dihapus : ")
-                self.remove_task(hapus)
-                os.system("cls")
-            elif pilihan == 3:
-                tanda = input("Masukkan to do list yang sudah selesai : ")
-                self.complete_task(tanda)
-                os.system("cls")
-            elif pilihan == 4:
-                self.display_list()
-                os.system("pause")
-                os.system("cls")
-            elif pilihan == 5:
-                tdl = input("Masukkan to do list yang ingin dicari : ")
-                task = self.jump_search_task(tdl)
-                if task is not None:
-                    table = PrettyTable(['Description', 'Completed', 'Created At'])
-                    table.add_row([task.description, task.completed, task.created_at])
-                    print(table)
-                else:
-                    print(f"Task dengan description '{tdl}' tidak ditemukan.")
-                input("Tekan Enter untuk melanjutkan...")
-                os.system("cls")
-            elif pilihan == 6:
-                pilah = self.sort()
-                print("1. Ascending\n2. Descending")
-                x = input("Masukkan pilihan (1/2) : ")
-                if x =='1':
+            try:
+                print(60*"=")
+                print("1. Tambahkan To Do List")
+                print("2. Hapus To Do List ")
+                print("3. Tandai To Do List yang Selesai")
+                print("4. Tampilkan To Do List")
+                print("5. Cari To Do List")
+                print("6. Mengurutkan To Do List sesuai Abjad ")
+                print("7. Tampilkan History Input dan Delete Data ")
+                print("8. Hapus Semua To Do List")
+                print("9. Exit")
+                print(60*"=")
+                pilihan = input("Masukkan pilihan anda : ")
+                if pilihan == '1':
+                    tdl = input("Masukkan to do list terbaru : ")
+                    if len(tdl) > 50:
+                        print("<<< to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) >>>")
+                    else:
+                        self.add_task(tdl)
+                        os.system("cls")
+                elif pilihan == '2':
+                    hapus = input("Masukkan to do list yang ingin dihapus : ")
+                    self.remove_task(hapus)
+                    os.system("cls")
+                elif pilihan == '3':
+                    tanda = input("Masukkan to do list yang sudah selesai : ")
+                    self.complete_task(tanda)
+                    os.system("cls")
+                elif pilihan == '4':
+                    self.display_list()
+                    input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
+                elif pilihan == '5':
+                    tdl = input("Masukkan to do list yang ingin dicari : ")
+                    task = self.jump_search_task(tdl)
+                    if task is not None:
+                        table = PrettyTable(['Description', 'Completed', 'Created At'])
+                        table.add_row([task.description, task.completed, task.created_at])
+                        print(table)
+                    else:
+                        print(f"Task dengan description '{tdl}' tidak ditemukan.")
+                    input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
+                elif pilihan == '6':
+                    pilah = self.sort()
+                    print("1. Ascending\n2. Descending")
+                    x = input("Masukkan Pilihan (1/2) : ")
                     hasil = self.mergesortasc(pilah)
                     self.tampilansort(hasil)
-                    os.system("pause")
-                elif x == '2':
-                    hasil = self.mergesortdesc(pilah)
-                    self.tampilansort(hasil)
-                    os.system("pause")
+                    input("Tekan Enter untuk melanjutkan...")
+                elif pilihan == '7':
+                    self.show_history()
+                    input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
+                elif pilihan == '8':
+                    cursor.execute("DELETE FROM"+" "+printtabel)
+                    print("<<< History Telah Dihapus >>>")
+                    input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
                 else:
-                    print("Masukkan pilihan yang tersedia")
-            else:
+                    os.system("cls")
+                    break
+            except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                break
+                print(" !!! Mohon Masukkan Pilihan yang Tersedia !!! ")
 
     def aluradmin(self):
+        global printtabel
+        global x
         while True:
-            os.system("cls")
-            print(65*"=")
-            print("1. Tambahkan To Do List")
-            print("2. Hapus To Do List ")
-            print("3. Tandai To Do List yang Selesai")
-            print("4. Tampilkan To Do List")
-            print("5. Tampilkan History Input dan Delete Data")
-            print("6. Cari To Do List")
-            print("7. Mengurutkan To Do List sesuai Abjad ")
-            print("8. Exit")
-            print(65*"=")
-            pilihan = int(input("Masukkan pilihan anda : "))
-            if pilihan == 1:
-                tdl = input("Masukkan to do list terbaru : ")
-                self.add_task(tdl)
-                os.system("cls")
-            elif pilihan == 2:
-                hapus = input("Masukkan to do list yang ingin dihapus : ")
-                self.remove_task(hapus)
-                os.system("cls")
-            elif pilihan == 3:
-                tanda = input("Masukkan to do list yang sudah selesai : ")
-                self.complete_task(tanda)
-                os.system("cls")
-            elif pilihan == 4:
-                self.display_list()
-                os.system("pause")
-                os.system("cls")
-            elif pilihan == 5:
-                self.show_history()
-                os.system("pause")
-                os.system("cls")
-            elif pilihan == 6:
-                tdl = input("Masukkan to do list yang ingin dicari : ")
-                task = self.jump_search_task(tdl)
-                if task is not None:
-                    table = PrettyTable(['Description', 'Completed', 'Created At'])
-                    table.add_row([task.description, task.completed, task.created_at])
-                    print(table)
+            try:
+                print(65*"=")
+                print("1. Tampilkan History Input dan Delete Data User")
+                print("2. Hapus History User")                
+                print("3. Exit")
+                print(65*"=")
+                pilihan = input("Masukkan pilihan anda : ")
+                if pilihan == '1':
+                    lihat = input("Masukkan username user yang ingin dilihat historynya : ")
+                    if lihat in data_1["username"]:
+                        indexuser = data_1["username"].index(lihat)
+                        printtabel = namatabel(indexuser)
+                        self.show_history()
+                    else:
+                        print("<<< Username tidak ditemukan >>>")
+                    input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
+                elif pilihan == '2':
+                    lihat = input("Masukkan username user yang ingin dihapus historynya : ")
+                    if lihat in data_1["username"]:
+                        indexuser = data_1["username"].index(lihat)
+                        tabeluser = namatabel(indexuser)
+                        cursor.execute("DELETE FROM"+" "+tabeluser)
+                        print("<<< History Telah Dihapus >>>")
+                        input("Tekan Enter untuk melanjutkan...")
+                        os.system("cls")
+                    else:
+                        print("<<< Username Tidak Ditemukan >>>")
+                        os.system("pause")
+                    os.system("cls")
                 else:
-                    print(f"Task dengan description '{tdl}' tidak ditemukan.")
-                input("Tekan Enter untuk melanjutkan...")
+                    os.system("cls")
+                    print(" !!! Mohon Masukkan Pilihan yang Tersedia !!! ")
+                    break
+            except ValueError and KeyboardInterrupt:
                 os.system("cls")
-            elif pilihan == 7:
-                pilah = self.sort()
-                print("1. Ascending\n2. Descending")
-                x = input("Masukkan pilihan (1/2) : ")
-                if x == '1':
-                    hasil = self.mergesortasc(pilah)
-                    self.tampilansort(hasil)
-                    os.system("pause")
-                elif x == '2':
-                    hasil = self.mergesortdesc(pilah)
-                    self.tampilansort(hasil)
-                    os.system("pause")
-                else:
-                    print("Masukkan pilihan yang tersedia")
-            else:
-                os.system("cls")
-                break
-    
+                print("Mohon Masukkan Pilihan yang Tersedia")
+                
     def mulai(self):
-        global tdl
-        os.system("cls")
+        global printtabel
         while True:
-            print("Selamat datang di program pembuatan to do list\nSilahkan login terlebih dahulu")
-            print("1. Login Admin\n2. Login User\n3. Register User\nPRESS ANYTHING FOR EXIT")
-            x = input("masukkan pilihan anda : ")
-            if x == '1':
-                login_admin()
-                self.aluradmin()
-            elif x == '2':
-                login_user()
-                self.aluruser()
-            elif x == '3':
-                tambah_user()
-            else:
-                break
+            try:
+                print("Selamat datang di program pembuatan to do list\nSilahkan login terlebih dahulu")
+                print("1. Login Admin\n2. Login User\n3. Register User\nPRESS ENTER FOR EXIT")
+                x = input("Masukkan Pilihan Anda : ")
+                if x == '1':
+                    login_admin()
+                    self.aluradmin()
+                elif x == '2':
+                    printtabel = login_user()
+                    self.aluruser()
+                elif x == '3':
+                    tambah_user()
+                else:
+                    break
+            except ValueError and KeyboardInterrupt:
+                os.system("cls")
+                print("<<<  Mohon Masukkan Pilihan yang Benar >>>")
 
             
 import os
