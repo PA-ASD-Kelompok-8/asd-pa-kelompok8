@@ -40,9 +40,11 @@ Sedangkan privilege dari user pengguna adalah setiap pengguna dapat memasukkan t
 
 ## Struktur Project
 
+...
 
 ## Fitur dan Fungsionalitas
 
+...
 
 ## Cara Penggunaan
 
@@ -63,6 +65,19 @@ Jika kita login sebagai user maka program akan menampilkan beberapa pilihan yang
 
 Sedangkan jika kita login sebagai admin maka program akan menampilkan beberapa pilihan yang dapat dilakukan sama seperti login sebagai user namun ada satu kelebihan yaitu admin dapat Menampilkan History input dan delete data.
 
+
+
+#### Tambah To Do List
+![image](https://user-images.githubusercontent.com/121870536/232784999-760b9a5b-e05a-492c-8ebf-da3eb84ef0ef.png)
+
+...
+
+#### Hapus To Do List
+![image](https://user-images.githubusercontent.com/121870536/232790372-5f3d3886-4291-4339-a886-9358495f07db.png)
+
+...
+
+#### Tandai To Do List yang selesai
 
 
 
