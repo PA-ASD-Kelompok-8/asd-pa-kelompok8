@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 import datetime
-from loginawal import *
+from LOGINNNNNNNNN import *
+import mysql.connector
 
 class Task:
     def __init__(self, description):
@@ -11,9 +12,18 @@ class Task:
         self.deleted_at = None
 
 class ToDoList:
+    global cursor
+    global mydb
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database = "asd")
+        
+    cursor = mydb.cursor()
+    
     def __init__(self):
         self.head = None
-        self.history = []
     
     def add_task(self, description):
         task = Task(description)
@@ -24,7 +34,10 @@ class ToDoList:
             while current.next is not None:
                 current = current.next
             current.next = task
-        self.history.append(('Menambahkan', task.description, task.created_at))
+        sql = "INSERT INTO"+" "+printtabel+" "+"(status, keterangan, waktu) VALUES (%s , %s, %s)"
+        val = ("menambahkan", task.description, task. created_at)
+        cursor.execute(sql, val)
+        mydb.commit()
     
     def remove_task(self, description):
         current = self.head
@@ -36,12 +49,15 @@ class ToDoList:
                     self.head = current.next
                 else:
                     previous.next = current.next
-                self.history.append(('Menghapus', current.description, current.deleted_at))
+                sql = "INSERT INTO"+" "+printtabel+" "+"(status, keterangan, waktu) VALUES (%s , %s, %s)"
+                val = ("menghapus", current.description, current.created_at)
+                cursor.execute(sql, val)
+                mydb.commit()
                 return True
             previous = current
             current = current.next
         print("<<< To Do List Masih Kosong / To Do List Tidak Ada >>>")
-        return os.system("pause")
+        return input("Tekan Enter untuk melanjutkan...")
     
     def complete_task(self, description):
         current = self.head
@@ -51,7 +67,7 @@ class ToDoList:
                 return True
             current = current.next
         print("<<< To Do List Masih Kosong >>>")
-        return os.system("pause")
+        return input("Tekan Enter untuk melanjutkan...")
     
     def display_list(self):
         current = self.head
@@ -63,30 +79,34 @@ class ToDoList:
             current = current.next
 
     def show_history(self):
-        if self.history == []:
-            print("Tidak Ada History")
-        else:
-            table = PrettyTable()
-            table.field_names = ["Keterangan","To Do List","Waktu"]
-            for i in self.history:
-                table.add_row(i)
-            print(table)
+        cursor.execute("SELECT * FROM"+" "+printtabel)
+        table = PrettyTable()
+        table.field_names = [i for i in cursor.column_names]
+        for i in cursor:
+            table.add_row(i)
+        print(table)
 
     def jump_search_task(self, description):
-        tasks = self.sort_tasks()
-        n = len(tasks)
-        jump = int(n**0.5)
-        left = 0
-        right = 0
-        
-        while right < n and tasks[right].description < description:
-            left = right
-            right = min(right+jump, n-1)
-        
-        for i in range(left, right+1):
-            if tasks[i].description == description:
-                return tasks[i]
-        return None
+        try:
+            # Sorting tasks by description
+            tasks = self.sort_tasks()
+            
+            # Applying jump search algorithm
+            n = len(tasks)
+            jump = int(n**0.5)
+            left = 0
+            right = jump
+            
+            while right < n and tasks[right].description < description:
+                left = right
+                right += jump
+            
+            for i in range(left, min(right,n)):
+                if tasks[i].description == description:
+                    return tasks[i]
+            return None
+        except ValueError and KeyboardInterrupt:
+            print("<<< harap input data yang benar >>>")
     
     def sort_tasks(self):
         tasks = []
@@ -94,7 +114,7 @@ class ToDoList:
         while current is not None:
             tasks.append(current)
             current = current.next
-        tasks.sort(key=lambda task: task.description)
+        tasks.sort(key=lambda tasks: tasks.description)
         return tasks
     
 
@@ -120,58 +140,35 @@ class ToDoList:
             self.mergesortasc(right_data)
 
             i = j = k=0
-            
-            while i < len(left_data) and j < len (right_data):
-                if left_data[i] < right_data[j]:
-                    data[k]= left_data[i]
-                    i += 1
-                    k += 1
 
-                else:
-                    data[k] = right_data[j]
-                    j += 1
-                    k += 1
+            if x == '1':
+                while i < len(left_data) and j < len (right_data):
+                    if left_data[i] < right_data[j]:
+                        data[k]= left_data[i]
+                        i += 1
+                        k += 1
 
-            while i < len(left_data):
-                data[k] = left_data[i]
-                i += 1
-                k += 1
+                    else:
+                        data[k] = right_data[j]
+                        j += 1
+                        k += 1
+            elif x == '2':
+                while i < len(left_data) and j < len (right_data):
+                    if left_data[i] > right_data[j]:
+                        data[k]= left_data[i]
+                        i += 1
+                        k += 1
 
-            
-            while j < len(right_data):
-                data[k] = right_data[j]
-                j += 1
-                k += 1
-        return data
-    
-    def mergesortdesc(self,data):
-        if len(data) > 1:
-            mid = len(data) // 2
-            left_data = data[:mid]
-            right_data = data[mid:]
-
-            self.mergesortdesc(left_data)
-            self.mergesortdesc(right_data)
-
-            i = j = k=0
-            
-            while i < len(left_data) and j < len (right_data):
-                if left_data[i] > right_data[j]:
-                    data[k]= left_data[i]
-                    i += 1
-                    k += 1
-
-                else:
-                    data[k] = right_data[j]
-                    j += 1
-                    k += 1
+                    else:
+                        data[k] = right_data[j]
+                        j += 1
+                        k += 1
 
             while i < len(left_data):
                 data[k] = left_data[i]
                 i += 1
                 k += 1
 
-            
             while j < len(right_data):
                 data[k] = right_data[j]
                 j += 1
@@ -197,9 +194,9 @@ class ToDoList:
                 print("3. Tandai To Do List yang Selesai")
                 print("4. Tampilkan To Do List")
                 print("5. Cari To Do List")
-                print("6. Mengurutkan To Do List sesuai Abjad ")
+                print("6. Mengurutkan To Do List sesuai abjad ")
                 print("7. Tampilkan History Input dan Delete Data ")
-                print("8. Hapus Semua To Do List")
+                print("8. Hapus History Semua To Do List")
                 print("9. Exit")
                 print(60*"=")
                 pilihan = input("Masukkan pilihan anda : ")
@@ -207,6 +204,8 @@ class ToDoList:
                     tdl = input("Masukkan to do list terbaru : ")
                     if len(tdl) > 50:
                         print("<<< to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) >>>")
+                    elif tdl == "":
+                        print("<<< harap tidak menginput data kosong >>>")
                     else:
                         self.add_task(tdl)
                         os.system("cls")
@@ -215,7 +214,7 @@ class ToDoList:
                     self.remove_task(hapus)
                     os.system("cls")
                 elif pilihan == '3':
-                    tanda = input("Masukkan to do list yang sudah selesai : ")
+                    tanda = input("Masukkan to do list yang sudah kelar : ")
                     self.complete_task(tanda)
                     os.system("cls")
                 elif pilihan == '4':
@@ -236,7 +235,7 @@ class ToDoList:
                 elif pilihan == '6':
                     pilah = self.sort()
                     print("1. Ascending\n2. Descending")
-                    x = input("Masukkan Pilihan (1/2) : ")
+                    x = input("masukkan pilihan (1/2) : ")
                     hasil = self.mergesortasc(pilah)
                     self.tampilansort(hasil)
                     input("Tekan Enter untuk melanjutkan...")
@@ -246,7 +245,7 @@ class ToDoList:
                     os.system("cls")
                 elif pilihan == '8':
                     cursor.execute("DELETE FROM"+" "+printtabel)
-                    print("<<< History Telah Dihapus >>>")
+                    print("<<< history telah dihapus >>>")
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 else:
@@ -254,11 +253,10 @@ class ToDoList:
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                print(" !!! Mohon Masukkan Pilihan yang Tersedia !!! ")
+                print("harap masukkan pilihan yang tersedia")
 
     def aluradmin(self):
         global printtabel
-        global x
         while True:
             try:
                 print(65*"=")
@@ -274,7 +272,7 @@ class ToDoList:
                         printtabel = namatabel(indexuser)
                         self.show_history()
                     else:
-                        print("<<< Username tidak ditemukan >>>")
+                        print("<<< username tidak ditemukan >>>")
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 elif pilihan == '2':
@@ -283,28 +281,28 @@ class ToDoList:
                         indexuser = data_1["username"].index(lihat)
                         tabeluser = namatabel(indexuser)
                         cursor.execute("DELETE FROM"+" "+tabeluser)
-                        print("<<< History Telah Dihapus >>>")
+                        print("<<< history telah dihapus >>>")
                         input("Tekan Enter untuk melanjutkan...")
                         os.system("cls")
                     else:
-                        print("<<< Username Tidak Ditemukan >>>")
+                        print("<<< username tidak ditemukan >>>")
                         os.system("pause")
                     os.system("cls")
                 else:
                     os.system("cls")
-                    print(" !!! Mohon Masukkan Pilihan yang Tersedia !!! ")
+                    print("<<< harap masukkan pilihan yang tersedia >>>")
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                print("Mohon Masukkan Pilihan yang Tersedia")
-                
+                print("harap masukkan pilihan yang tersedia")
+    
     def mulai(self):
         global printtabel
         while True:
             try:
                 print("Selamat datang di program pembuatan to do list\nSilahkan login terlebih dahulu")
                 print("1. Login Admin\n2. Login User\n3. Register User\nPRESS ENTER FOR EXIT")
-                x = input("Masukkan Pilihan Anda : ")
+                x = input("masukkan pilihan anda : ")
                 if x == '1':
                     login_admin()
                     self.aluradmin()
@@ -317,9 +315,10 @@ class ToDoList:
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                print("<<<  Mohon Masukkan Pilihan yang Benar >>>")
+                print("<<<  harap masukkan pilihan yang benar >>>")
 
             
 import os
+os.system("cls")
 kaka = ToDoList()
 kaka.mulai()
