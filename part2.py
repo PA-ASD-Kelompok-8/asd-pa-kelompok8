@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 import datetime
 from LOGINNNNNNNNN import *
 import mysql.connector
+from colorama import Fore,Style
 
 class Task:
     def __init__(self, description):
@@ -56,7 +57,7 @@ class ToDoList:
                 return True
             previous = current
             current = current.next
-        print("<<< To Do List Masih Kosong / To Do List Tidak Ada >>>")
+        print(Fore.RED + "<<< To Do List Masih Kosong / To Do List Tidak Ada >>>",Style.RESET_ALL)
         return input("Tekan Enter untuk melanjutkan...")
     
     def complete_task(self, description):
@@ -66,7 +67,7 @@ class ToDoList:
                 current.completed = True
                 return True
             current = current.next
-        print("<<< To Do List Masih Kosong >>>")
+        print(Fore.RED + "<<< To Do List Masih Kosong >>>",Style.RESET_ALL)
         return input("Tekan Enter untuk melanjutkan...")
     
     def display_list(self):
@@ -106,7 +107,7 @@ class ToDoList:
                     return tasks[i]
             return None
         except ValueError and KeyboardInterrupt:
-            print("<<< harap input data yang benar >>>")
+            print(Fore.RED + "<<< harap input data yang benar >>>",Style.RESET_ALL)
     
     def sort_tasks(self):
         tasks = []
@@ -203,9 +204,9 @@ class ToDoList:
                 if pilihan == '1':
                     tdl = input("Masukkan to do list terbaru : ")
                     if len(tdl) > 50:
-                        print("<<< to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) >>>")
+                        print(Fore.RED + "<<< to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) >>>",Style.RESET_ALL)
                     elif tdl == "":
-                        print("<<< harap tidak menginput data kosong >>>")
+                        print(Fore.RED + "<<< harap tidak menginput data kosong >>>",Style.RESET_ALL)
                     else:
                         self.add_task(tdl)
                         os.system("cls")
@@ -245,7 +246,7 @@ class ToDoList:
                     os.system("cls")
                 elif pilihan == '8':
                     cursor.execute("DELETE FROM"+" "+printtabel)
-                    print("<<< history telah dihapus >>>")
+                    print(Fore.RED + "<<< history telah dihapus >>>",Style.RESET_ALL)
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 else:
@@ -272,7 +273,7 @@ class ToDoList:
                         printtabel = namatabel(indexuser)
                         self.show_history()
                     else:
-                        print("<<< username tidak ditemukan >>>")
+                        print(Fore.RED + "<<< username tidak ditemukan >>>",Style.RESET_ALL)
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 elif pilihan == '2':
@@ -281,16 +282,16 @@ class ToDoList:
                         indexuser = data_1["username"].index(lihat)
                         tabeluser = namatabel(indexuser)
                         cursor.execute("DELETE FROM"+" "+tabeluser)
-                        print("<<< history telah dihapus >>>")
+                        print(Fore.RED + "<<< history telah dihapus >>>",Style.RESET_ALL)
                         input("Tekan Enter untuk melanjutkan...")
                         os.system("cls")
                     else:
-                        print("<<< username tidak ditemukan >>>")
+                        print(Fore.RED + "<<< username tidak ditemukan >>>",Style.RESET_ALL)
                         os.system("pause")
                     os.system("cls")
                 else:
                     os.system("cls")
-                    print("<<< harap masukkan pilihan yang tersedia >>>")
+                    print(Fore.RED + "<<< harap masukkan pilihan yang tersedia >>>",Style.RESET_ALL)
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
@@ -315,7 +316,7 @@ class ToDoList:
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                print("<<<  harap masukkan pilihan yang benar >>>")
+                print(Fore.RED + "<<<  harap masukkan pilihan yang benar >>>",Style.RESET_ALL)
 
             
 import os
