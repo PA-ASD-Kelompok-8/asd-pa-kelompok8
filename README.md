@@ -38,13 +38,6 @@ Program ini memiliki multiuser admin dan pengguna.
 Privilege dari user admin adalah admin dapat melihat history dari seluruh pengguna dan admin juga dapat menghapus history para pengguna. 
 Sedangkan privilege dari user pengguna adalah setiap pengguna dapat memasukkan to do list, menghapus to do list yang sudah dibuat oleh pengguna, menandai to do list yang sudah diselesaikan pengguna, menampilkan seluruh to do list yang telah dibuat, mencari to do list, mengurutkan to do list yang telah dibuat sesuai abjad, menampilkan history to do list pengguna, dan dapat menghapus seluruh to do listnya.
 
-## Struktur Project
-
-...
-
-## Fitur dan Fungsionalitas
-
-...
 
 ## Cara Penggunaan
 
@@ -55,42 +48,59 @@ Pada saat menjalankan program, program akan menampilkan menu awal yang berisi ti
 
 
 #### Login Sebagai User
-![image](https://user-images.githubusercontent.com/121870536/232704546-b658ac42-5601-4f9c-b7dc-5ed56c307f59.png)
+![image](https://user-images.githubusercontent.com/121870536/235283100-b3e6271f-b4ec-4d2a-8d67-4c87b6893335.png)
 
-Jika kita login sebagai user maka program akan menampilkan beberapa pilihan yang dapat dilakukan seperti, Menambah To Do List, Menghapus To Do List, Menandai To Do List yang sudah selesai, Menampilkan To Do List, Mencari To Do List dan Mengurutkan To Do List.
-
-
-#### Login Sebagai Admin
-![image](https://user-images.githubusercontent.com/121870536/232700594-b242517f-4168-4d43-bd0d-05ce971dad96.png)
-
-Sedangkan jika kita login sebagai admin maka program akan menampilkan beberapa pilihan yang dapat dilakukan sama seperti login sebagai user namun ada satu kelebihan yaitu admin dapat Menampilkan History input dan delete data.
-
+Jika kita login sebagai user maka program akan menampilkan beberapa pilihan yang dapat dilakukan seperti, Menambah To Do List, Menghapus To Do List, Menandai To Do List yang sudah selesai, Menampilkan To Do List, Mencari To Do List, Mengurutkan To Do List, Menampilkan History dan Menghapus semua History.
 
 
 #### Tambah To Do List
-![image](https://user-images.githubusercontent.com/121870536/232784999-760b9a5b-e05a-492c-8ebf-da3eb84ef0ef.png)
+![image](https://user-images.githubusercontent.com/121870536/235283386-97847970-0861-4d53-93a6-b867d0a5e9c9.png)
 
-...
+Untuk fungsi tambah, user dapat menambah atau membuat to do list dengan menginputkan seperti contoh pada gambar tersebut.
+
 
 #### Hapus To Do List
-![image](https://user-images.githubusercontent.com/121870536/232790372-5f3d3886-4291-4339-a886-9358495f07db.png)
+![image](https://user-images.githubusercontent.com/121870536/235283474-1af4e535-a89d-4306-88c2-ada273553166.png)
 
-...
 
 #### Tandai To Do List yang selesai
+![image](https://user-images.githubusercontent.com/121870536/235283583-8bd76c11-478a-45de-829e-a0a9bc04f94a.png)
+
+
+#### Tampil To Do List
+![image](https://user-images.githubusercontent.com/121870536/235283615-0bf103b6-c6ac-4197-bb0f-7a41b951d0a8.png)
+
+
+#### Cari To Do List
+![image](https://user-images.githubusercontent.com/121870536/235284173-5506c4bb-3c7e-45dc-a193-a70e89c28a69.png)
+
+
+#### Mengurutkan To Do List
+![image](https://user-images.githubusercontent.com/121870536/235284560-870b5de9-3f86-4b1f-be29-c9788b691c99.png)
+![image](https://user-images.githubusercontent.com/121870536/235284569-b4cf11ea-0889-4187-ba8c-076356119ba9.png)
+
+
+
+#### Menampilkan History To Do List
+![image](https://user-images.githubusercontent.com/121870536/235284585-ef41a25a-a6dc-452f-82c5-d89807424c1c.png)
+
+
+#### Menghapus Semua History To Do List
+![image](https://user-images.githubusercontent.com/121870536/235284603-7a790f98-20c0-4546-9bb0-c6b5b5bacaa0.png)
 
 
 
 
+#### Login Sebagai Admin
+![image](https://user-images.githubusercontent.com/121870536/235282971-71247699-cd61-493b-81cc-5f0d2a869569.png)
+
+Sedangkan jika kita login sebagai admin maka kita dapat melihat history dari user dan dapat menghapus history user
 
 
+#### Tampilkan History User
+![image](https://user-images.githubusercontent.com/121870536/235285476-1fd59012-dbb8-4d09-976e-1bd45c1c4128.png)
 
 
-
-
-
-
-
-
-
+#### Hapus History User
+![image](https://user-images.githubusercontent.com/121870536/235285497-a108af72-21c3-478c-b58a-813c5368ee3a.png)
 
