@@ -1,7 +1,6 @@
 from prettytable import PrettyTable
 import datetime
 from loginawal import *
-import mysql.connector
 from colorama import Fore,Style
 
 class Task:
@@ -13,19 +12,9 @@ class Task:
         self.deleted_at = None
 
 class ToDoList:
-    global cursor
-    global mydb
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database = "asd")
-        
-    cursor = mydb.cursor()
-    
     def __init__(self):
         self.head = None
-    
+        
     def add_task(self, description):
         task = Task(description)
         if self.head is None:
@@ -37,8 +26,8 @@ class ToDoList:
             current.next = task
         sql = "INSERT INTO"+" "+printtabel+" "+"(status, keterangan, waktu) VALUES (%s , %s, %s)"
         val = ("menambahkan", task.description, task. created_at)
-        cursor.execute(sql, val)
-        mydb.commit()
+        mycursor.execute(sql, val)
+        conn.commit()
     
     def remove_task(self, description):
         current = self.head
@@ -52,12 +41,12 @@ class ToDoList:
                     previous.next = current.next
                 sql = "INSERT INTO"+" "+printtabel+" "+"(status, keterangan, waktu) VALUES (%s , %s, %s)"
                 val = ("menghapus", current.description, current.created_at)
-                cursor.execute(sql, val)
-                mydb.commit()
+                mycursor.execute(sql, val)
+                conn.commit()
                 return True
             previous = current
             current = current.next
-        print(Fore.RED + "<<< To Do List Masih Kosong / To Do List Tidak Ada >>>",Style.RESET_ALL)
+        print(Fore.RED + "To Do List Masih Kosong / To Do List Tidak Ada ❗❗❗",Style.RESET_ALL)
         return input("Tekan Enter untuk melanjutkan...")
     
     def complete_task(self, description):
@@ -67,29 +56,32 @@ class ToDoList:
                 current.completed = True
                 return True
             current = current.next
-        print(Fore.RED + "<<< To Do List Masih Kosong >>>",Style.RESET_ALL)
+        print(Fore.RED + "To Do List Masih Kosong / To Do List Tidak Ada❗❗❗",Style.RESET_ALL)
         return input("Tekan Enter untuk melanjutkan...")
     
     def display_list(self):
         current = self.head
         while current is not None:
             if current.completed:
-                print("[x]", current.description)
+                print("✅", current.description)
             else:
-                print("[ ]", current.description)
+                print("🟩", current.description)
             current = current.next
 
     def show_history(self):
-        cursor.execute("SELECT * FROM"+" "+printtabel)
+        mycursor.execute("SELECT * FROM"+" "+printtabel)
         table = PrettyTable()
-        table.field_names = [i for i in cursor.column_names]
-        for i in cursor:
+        table.field_names = [i for i in mycursor.column_names]
+        for i in mycursor:
             table.add_row(i)
         print(table)
 
     def jump_search_task(self, description):
         try:
+            # Sorting tasks by description
             tasks = self.sort_tasks()
+            
+            # Applying jump search algorithm
             n = len(tasks)
             jump = int(n**0.5)
             left = 0
@@ -104,7 +96,7 @@ class ToDoList:
                     return tasks[i]
             return None
         except ValueError and KeyboardInterrupt:
-            print(Fore.RED + "<<< harap input data yang benar >>>",Style.RESET_ALL)
+            print(Fore.RED + "harap input data yang benar ❗❗❗",Style.RESET_ALL)
     
     def sort_tasks(self):
         tasks = []
@@ -201,9 +193,9 @@ class ToDoList:
                 if pilihan == '1':
                     tdl = input("Masukkan to do list terbaru : ")
                     if len(tdl) > 50:
-                        print(Fore.RED + "<<< to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) >>>",Style.RESET_ALL)
+                        print(Fore.RED + "to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) ❗❗❗",Style.RESET_ALL)
                     elif tdl == "":
-                        print(Fore.RED + "<<< harap tidak menginput data kosong >>>",Style.RESET_ALL)
+                        print(Fore.RED + "harap tidak menginput data kosong ❗❗❗",Style.RESET_ALL)
                     else:
                         self.add_task(tdl)
                         os.system("cls")
@@ -242,8 +234,8 @@ class ToDoList:
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 elif pilihan == '8':
-                    cursor.execute("DELETE FROM"+" "+printtabel)
-                    print(Fore.RED + "<<< history telah dihapus >>>",Style.RESET_ALL)
+                    mycursor.execute("DELETE FROM"+" "+printtabel)
+                    print(Fore.RED + "history telah dihapus ❗❗❗",Style.RESET_ALL)
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 else:
@@ -270,7 +262,7 @@ class ToDoList:
                         printtabel = namatabel(indexuser)
                         self.show_history()
                     else:
-                        print(Fore.RED + "<<< username tidak ditemukan >>>",Style.RESET_ALL)
+                        print(Fore.RED + "username tidak ditemukan ❗❗❗",Style.RESET_ALL)
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 elif pilihan == '2':
@@ -278,17 +270,17 @@ class ToDoList:
                     if lihat in data_1["username"]:
                         indexuser = data_1["username"].index(lihat)
                         tabeluser = namatabel(indexuser)
-                        cursor.execute("DELETE FROM"+" "+tabeluser)
-                        print(Fore.RED + "<<< history telah dihapus >>>",Style.RESET_ALL)
+                        mycursor.execute("DELETE FROM"+" "+tabeluser)
+                        print(Fore.RED + "history telah dihapus ❗❗❗",Style.RESET_ALL)
                         input("Tekan Enter untuk melanjutkan...")
                         os.system("cls")
                     else:
-                        print(Fore.RED + "<<< username tidak ditemukan >>>",Style.RESET_ALL)
+                        print(Fore.RED + "username tidak ditemukan ❗❗❗",Style.RESET_ALL)
                         os.system("pause")
                     os.system("cls")
                 else:
                     os.system("cls")
-                    print(Fore.RED + "<<< harap masukkan pilihan yang tersedia >>>",Style.RESET_ALL)
+                    print(Fore.RED + "harap masukkan pilihan yang tersedia ❗❗❗",Style.RESET_ALL)
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
@@ -313,7 +305,7 @@ class ToDoList:
                     break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
-                print(Fore.RED + "<<<  harap masukkan pilihan yang benar >>>",Style.RESET_ALL)
+                print(Fore.RED + "harap masukkan pilihan yang benar ❗❗❗",Style.RESET_ALL)
 
             
 import os
