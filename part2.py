@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 import datetime
-from LOGINNNNNNNNN import *
+from loginawal import *
 import mysql.connector
 from colorama import Fore,Style
 
