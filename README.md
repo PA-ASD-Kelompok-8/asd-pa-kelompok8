@@ -62,33 +62,39 @@ Untuk fungsi tambah, user dapat menambah atau membuat to do list dengan menginpu
 #### Hapus To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235283474-1af4e535-a89d-4306-88c2-ada273553166.png)
 
+Untuk fungsi hapus, user dapat menghapus to dolist yang ditambahkan sebelumnya.
 
 #### Tandai To Do List yang selesai
 ![image](https://user-images.githubusercontent.com/121870536/235283583-8bd76c11-478a-45de-829e-a0a9bc04f94a.png)
 
+Untuk fungsi tandai, berfungsi untuk memberi tanda mana to do list yang sudah selesai.
 
 #### Tampil To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235283615-0bf103b6-c6ac-4197-bb0f-7a41b951d0a8.png)
 
+Untuk fungsi tampil, user dapat menampilkan semua to do list yang telah dibuat dan terdapat penanda mana to dolist yang sudah selesai dengan yang belum.
 
 #### Cari To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235284173-5506c4bb-3c7e-45dc-a193-a70e89c28a69.png)
 
+Untuk fungsi cari, user dapat mencari to do list yang telah dibuat dan terdapat keterangan complete dan waktu.
 
 #### Mengurutkan To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235284560-870b5de9-3f86-4b1f-be29-c9788b691c99.png)
 ![image](https://user-images.githubusercontent.com/121870536/235284569-b4cf11ea-0889-4187-ba8c-076356119ba9.png)
 
+Untuk fungsi sorting, user dapat mensorting dari yang terkecil atau terbesar dari to do list yang telah dibuat.
 
 
 #### Menampilkan History To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235284585-ef41a25a-a6dc-452f-82c5-d89807424c1c.png)
 
+Untuk fungsi tampil history, user dapat menampilkan history dari to do list yang telah dibuat dan dihapus.
 
 #### Menghapus Semua History To Do List
 ![image](https://user-images.githubusercontent.com/121870536/235284603-7a790f98-20c0-4546-9bb0-c6b5b5bacaa0.png)
 
-
+Untuk fungsi hapus history, user dapat menghapus semua history yang dimiliki setiap user.
 
 
 #### Login Sebagai Admin
@@ -97,10 +103,12 @@ Untuk fungsi tambah, user dapat menambah atau membuat to do list dengan menginpu
 Sedangkan jika kita login sebagai admin maka kita dapat melihat history dari user dan dapat menghapus history user
 
 
-#### Tampilkan History User
+#### Tampil History User
 ![image](https://user-images.githubusercontent.com/121870536/235285476-1fd59012-dbb8-4d09-976e-1bd45c1c4128.png)
 
+Untuk fungsi tampil history user, admin dapat menampilkan history dari user sesuai dengan usernamenya.
 
 #### Hapus History User
 ![image](https://user-images.githubusercontent.com/121870536/235285497-a108af72-21c3-478c-b58a-813c5368ee3a.png)
 
+Untuk fungsi hapus history user, admin dapat menghapus semua history dari user sesuai dengan usernamenya.
