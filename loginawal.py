@@ -1,23 +1,18 @@
 import os
 import pwinput
 import json
-import mysql.connector
+from colorama import Fore,Style
+from koneksi import database
 
-mydb = mysql.connector.connect(
-    host="sql12.freemysqlhosting.net",
-    user="sql12611967",
-    password="dbopan7",
-    database= "sql12611967"
-    )
-
-mycursor = mydb.cursor()
+conn = database()
+mycursor = conn.cursor()
 
 def tambahtabel():
     global x
     while True:
-        x = str(input("Masukkan Nama Tabel History : "))
+        x = str(input("masukkan nama tabel history : ")).replace(" ","_")
         if x == "":
-            print("<<< Nama Tabel Tidak Boleh Kosong !!! >>>")
+            print(Fore.RED + "nama tabel tidak boleh kosong ❗❗❗",Style.RESET_ALL)
         else:
             mycursor.execute("CREATE TABLE"+" "+x+" "+"(status VARCHAR(20), keterangan VARCHAR(50), waktu VARCHAR(30))")
             break
@@ -32,7 +27,7 @@ def indextabel():
     if indexnama in tampung:
         return(tampung.index(indexnama))
     else:
-        print("<<< Nama Tabel Tidak Ada Di Database >>>")
+        print(Fore.RED + "nama tabel tidak ada di database ❗❗❗",Style.RESET_ALL)
 
 def namatabel(index):
     mycursor.execute("show tables")
@@ -54,7 +49,6 @@ def settingUser():
 		json.dump(data_1, dataBaru)
 		
 def login_user():
-    global tabelhistory
     while True:
         username = input("Silahkan Masukkan Username Anda : ")
         password = pwinput.pwinput ("Silahkan Masukkan Password Anda : ")
@@ -66,32 +60,32 @@ def login_user():
                     os.system('cls')
                     return tabelhistory
                 else:
-                    print("\n <<< Password Anda Salah >>> \nSilahkan Coba Kembali\n")
+                    print(Fore.RED + "\nPassword Anda Salah ❗❗❗ \nSilahkan Coba Kembali\n",Style.RESET_ALL)
             except ValueError:
-                print("\n<<< Username Anda Salah >>> \nSilahkan Coba Kembali\n")
+                print(Fore.RED + "\nUsername Anda Salah❗❗❗ \nSilahkan Coba Kembali\n",Style.RESET_ALL)
 
 def tambah_user():
     while True:
         try:
             username = input("Masukkan Username Baru Anda : ")
             if username.isalnum()==False:
-                print("<<< Username tidak boleh ada spasi, simbol dan kosong >>>")
+                print(Fore.RED + "Username tidak boleh ada spasi, simbol dan kosong ❗❗❗",Style.RESET_ALL)
             elif username in data_1["username"]:
-                print("<<< Maaf, Username telah digunakan >>>")
+                print(Fore.RED + "Username telah digunakan ❗❗❗",Style.RESET_ALL)
             elif username not in data_1["username"]:
-                password=str(pwinput.pwinput("Masukkan Password : ")).replace("\t","").replace(" ","")
+                password=str(pwinput.pwinput("Masukkan password : ")).replace("\t","").replace(" ","")
                 if password =="":
-                    print("!!! Password dilarang kosong dan menggunakan spasi !!! ")
+                    print(Fore.RED + "Password dilarang kosong dan menggunakan spasi ❗❗❗",Style.RESET_ALL)
                 else:
                     tambahtabel()
                     data_1["username"].insert(indextabel(),username)
                     data_1["password"].insert(indextabel(),password)
                     os.system('cls')
-                    print("Registrasi berhasil ^____^")
+                    print(Fore.GREEN + "Registrasi berhasil ^____^",Style.RESET_ALL)
                     settingUser()
                     break
         except ValueError:
-            print ("<<< Dilarang memasukkan data kosong !!! >>>")
+            print (Fore.RED + "Dilarang memasukkan data kosong ❗❗❗",Style.RESET_ALL)
 
 def login_admin():
         while True:
@@ -103,6 +97,6 @@ def login_admin():
                     os.system('cls')
                     break
                 else:
-                    print("\n <<< Password Anda Salah >>> \nSilahkan Coba Kembali\n")
+                    print(Fore.RED + "\nPassword Anda Salah ❗❗❗ \nSilahkan Coba Kembali\n",Style.RESET_ALL)
             except ValueError:
-                print("\n <<< Username Anda Salah >>> \nSilahkan Coba Kembali\n")
+                print(Fore.RED + "\nUsername Anda Salah ❗❗❗ \nSilahkan Coba Kembali\n",Style.RESET_ALL)
