@@ -1,9 +1,9 @@
 from prettytable import PrettyTable
 import datetime
-from loginawal import *
+from LOGINNNNNNNNN import *
 from colorama import Fore,Style
 
-class Task:
+class Task():
     def __init__(self, description):
         self.description = description
         self.completed = False
@@ -178,17 +178,19 @@ class ToDoList:
         global x
         while True:
             try:
-                print(60*"=")
-                print("1. Tambahkan To Do List")
-                print("2. Hapus To Do List ")
-                print("3. Tandai To Do List yang Selesai")
-                print("4. Tampilkan To Do List")
-                print("5. Cari To Do List")
-                print("6. Mengurutkan To Do List sesuai abjad ")
-                print("7. Tampilkan History Input dan Delete Data ")
-                print("8. Hapus History Semua To Do List")
-                print("9. Exit")
-                print(60*"=")
+                table = PrettyTable(["No", "Menu"])
+                table.title = "Menu User"   
+                table.align = 'l'
+                table.add_row([1, "Tambahkan To Do List"])
+                table.add_row([2, "Hapus To Do List"])
+                table.add_row([3, "Tandai To Do List yang Selesai"])
+                table.add_row([4, "Tampilkan To Do List"])
+                table.add_row([5, "Cari To Do List"])
+                table.add_row([6, "Mengurutkan To Do List sesuai abjad"])
+                table.add_row([7, "Tampilkan History Input dan Delete Data"])
+                table.add_row([8, "Hapus History Semua To Do List"])
+                table.add_row([9, "Exit"])
+                print(table)
                 pilihan = input("Masukkan pilihan anda : ")
                 if pilihan == '1':
                     tdl = input("Masukkan to do list terbaru : ")
@@ -249,11 +251,13 @@ class ToDoList:
         global printtabel
         while True:
             try:
-                print(65*"=")
-                print("1. Tampilkan History Input dan Delete Data User")
-                print("2. Hapus History User")                
-                print("3. Exit")
-                print(65*"=")
+                table = PrettyTable(["No", "Menu"])
+                table.title = "Menu Admin"   
+                table.align = 'l'
+                table.add_row([1, "Tampilkan History Input dan Delete Data User"])
+                table.add_row([2, "Hapus History User"])
+                table.add_row([3, "Exit"])
+                print(table)
                 pilihan = input("Masukkan pilihan anda : ")
                 if pilihan == '1':
                     lihat = input("Masukkan username user yang ingin dilihat historynya : ")
@@ -278,10 +282,12 @@ class ToDoList:
                         print(Fore.RED + "username tidak ditemukan ❗❗❗",Style.RESET_ALL)
                         os.system("pause")
                     os.system("cls")
+                elif pilihan == '3':
+                    os.system("cls")
+                    break
                 else:
                     os.system("cls")
                     print(Fore.RED + "harap masukkan pilihan yang tersedia ❗❗❗",Style.RESET_ALL)
-                    break
             except ValueError and KeyboardInterrupt:
                 os.system("cls")
                 print("harap masukkan pilihan yang tersedia")
@@ -290,7 +296,17 @@ class ToDoList:
         global printtabel
         while True:
             try:
-                print("Selamat datang di program pembuatan to do list\nSilahkan login terlebih dahulu")
+                print("Selamat datang di program pembuatan to do list menggunakan Linked List")
+                print('''
+                
+  _____                     ___                      _        _              _     
+ |_   _|   ___      o O O  |   \    ___      o O O  | |      (_)     ___    | |_   
+   | |    / _ \    o       | |) |  / _ \    o       | |__    | |    (_-<    |  _|  
+  _|_|_   \___/   TS__[O]  |___/   \___/   TS__[O]  |____|  _|_|_   /__/_   _\__|  
+_|"""""|_|"""""| {======|_|"""""|_|"""""| {======|_|"""""|_|"""""|_|"""""|_|"""""| 
+"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' 
+''')
+                print('Silahkan login terlebih dahulu')
                 print("1. Login Admin\n2. Login User\n3. Register User\nPRESS ENTER FOR EXIT")
                 x = input("masukkan pilihan anda : ")
                 if x == '1':
