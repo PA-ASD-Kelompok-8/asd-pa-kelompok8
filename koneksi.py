@@ -13,5 +13,5 @@ def database():
     except Exception as error:
         if error:
             print(Fore.RED + f'Error:\n{error}.',Style.RESET_ALL)
-            print(Fore.GREEN+"Harap nyalakan Apache dan MySQL di XAMPP dahulu",Style.RESET_ALL)
+            print(Fore.GREEN+"Harap nyalakan Apache dan MySQL di XAMPP dahulu, lalu buat database dengan nama \'asd\'",Style.RESET_ALL)
             exit()
