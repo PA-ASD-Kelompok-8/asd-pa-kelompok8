@@ -109,15 +109,11 @@ class ToDoList:
     
     def sort(self):
         sudah = []
-        belum = []
         current = self.head
         while current is not None:
-            if current.completed == True:
-                sudah.append((current.description))
-            elif current.completed == False:
-                belum.append((current.description))
+            sudah.append((current.description))
             current = current.next   
-        return sudah + belum
+        return sudah
     
     def mergesortasc(self,data):
         if len(data) > 1:
