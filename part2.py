@@ -87,7 +87,7 @@ class ToDoList:
             left = 0
             right = jump
             
-            while right < n and tasks[right].description < description:
+            while right < n and tasks[right].description <= description:
                 left = right
                 right += jump
             
@@ -192,7 +192,7 @@ class ToDoList:
                 print(table)
                 pilihan = input("Masukkan pilihan anda : ")
                 if pilihan == '1':
-                    tdl = input("Masukkan to do list terbaru : ")
+                    tdl = input("Masukkan to do list terbaru : ").capitalize()
                     if len(tdl) > 50:
                         print(Fore.RED + "to do list tidak boleh lebih dari 50 huruf (spasi juga dihitung) ❗❗❗",Style.RESET_ALL)
                     elif tdl == "":
@@ -201,11 +201,11 @@ class ToDoList:
                         self.add_task(tdl)
                         os.system("cls")
                 elif pilihan == '2':
-                    hapus = input("Masukkan to do list yang ingin dihapus : ")
+                    hapus = input("Masukkan to do list yang ingin dihapus : ").capitalize()
                     self.remove_task(hapus)
                     os.system("cls")
                 elif pilihan == '3':
-                    tanda = input("Masukkan to do list yang sudah kelar : ")
+                    tanda = input("Masukkan to do list yang sudah kelar : ").capitalize()
                     self.complete_task(tanda)
                     os.system("cls")
                 elif pilihan == '4':
@@ -213,7 +213,7 @@ class ToDoList:
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 elif pilihan == '5':
-                    tdl = input("Masukkan to do list yang ingin dicari : ")
+                    tdl = input("Masukkan to do list yang ingin dicari : ").capitalize()
                     task = self.jump_search_task(tdl)
                     if task is not None:
                         table = PrettyTable(['Description', 'Completed', 'Created At'])
@@ -236,7 +236,7 @@ class ToDoList:
                     os.system("cls")
                 elif pilihan == '8':
                     mycursor.execute("DELETE FROM"+" "+printtabel)
-                    print(Fore.RED + "history telah dihapus ❗❗❗",Style.RESET_ALL)
+                    print(Fore.GREEN + "history telah dihapus 🚮",Style.RESET_ALL)
                     input("Tekan Enter untuk melanjutkan...")
                     os.system("cls")
                 else:
